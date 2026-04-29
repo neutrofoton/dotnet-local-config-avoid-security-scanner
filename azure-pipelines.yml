@@ -1,0 +1,28 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+- group: secure-config-api-secrets
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: sdk
+    version: 9.0.x
+
+- script: dotnet restore src/SecureConfigApi/SecureConfigApi.csproj
+  displayName: Restore
+
+- script: dotnet build src/SecureConfigApi/SecureConfigApi.csproj --configuration Release --no-restore
+  displayName: Build
+
+- script: dotnet publish src/SecureConfigApi/SecureConfigApi.csproj -c Release -o $(Build.ArtifactStagingDirectory)
+  displayName: Publish
+  env:
+    ConnectionStrings__DefaultConnection: $(ConnectionStrings__DefaultConnection)
+    Jwt__Key: $(Jwt__Key)
+    Email__Username: $(Email__Username)
+    Email__Password: $(Email__Password)

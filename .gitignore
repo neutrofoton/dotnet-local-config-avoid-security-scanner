@@ -427,3 +427,11 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+#---------------
+# Local secrets
+**/appsettings.Development.json
+**/appsettings.Local.json
+**/secrets.json
+**/.env
+**/.env.*
