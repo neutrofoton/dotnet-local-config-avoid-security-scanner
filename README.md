@@ -6,6 +6,17 @@
 - secrets.json
 - real passwords / tokens / API keys
 
+Add the following items in `.gitignore`
+```
+#---------------
+# Local secrets
+**/appsettings.Development.json
+**/appsettings.Local.json
+**/secrets.json
+**/.env
+**/.env.*
+```
+
 To run locally, create a file `appsettings.Development.json` with the following content:
 ```json
 {
