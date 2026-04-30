@@ -52,7 +52,7 @@ To demonstrate secret concept, create a file `secrets.json` with the following c
 }
 ```
 
-The content of `secrets.json` will override `appsettings.Development.json` content since secrets comes after `.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)`
+The content of `secrets.json` will override `appsettings.Development.json` content since secret registration comes after `.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)`
 
 ```csharp
 builder.Configuration
