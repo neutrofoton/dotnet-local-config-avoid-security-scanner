@@ -34,6 +34,36 @@ To run locally, create a file `appsettings.Development.json` with the following 
 
 ```
 
+We can also demonstrate **Secret** concept.
+To demonstrate secret concept, create a file `secrets.json` with the following content:
+
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "[SECRET]-Server=localhost;Database=SecureDb;User Id=sa;Password=super-secret"
+  },
+  "Jwt": {
+    "Key": "[SECRET]-my-local-jwt-secret"
+  },
+  "Email": {
+    "Username": "[SECRET]-local@company.local",
+    "Password": "[SECRET]-local-mail-password"
+  }
+}
+```
+
+The content of `secrets.json` will override `appsettings.Development.json` content since secrets comes after `.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)`
+
+```csharp
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+
+    //“Load User Secrets untuk assembly milik Program, dan kalau tidak ada file secret-nya, jangan error.”
+    .AddUserSecrets<Program>(optional: true) 
+    .AddEnvironmentVariables();
+```
+
 Open API through:
 https://localhost:7137/Swagger/index.html
 
