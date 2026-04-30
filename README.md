@@ -34,6 +34,10 @@ To run locally, create a file `appsettings.Development.json` with the following 
 
 ```
 
+Open API through:
+https://localhost:7137/Swagger/index.html
+
+
 ---
 
 # FAQ
